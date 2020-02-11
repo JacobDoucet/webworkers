@@ -14,14 +14,18 @@ export class AppComponent {
 
   num$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
-  height1$: Observable<string> = this.getHeightObservable$(100, 450);
-  height2$: Observable<string> = this.getHeightObservable$(250, 450);
-  height3$: Observable<string> = this.getHeightObservable$(300, 450);
-  height4$: Observable<string> = this.getHeightObservable$(350, 450);
-  height5$: Observable<string> = this.getHeightObservable$(400, 450);
-  height6$: Observable<string> = this.getHeightObservable$(450, 450);
+  bars: { n: number, height$: Observable<string>, class: string}[] = [];
 
   constructor(private cd: ChangeDetectorRef) {
+    this.bars = [
+      { n: 100, height$: this.getHeightObservable$(100), class: 'light' },
+      { n: 250, height$: this.getHeightObservable$(250), class: 'secondary' },
+      { n: 300, height$: this.getHeightObservable$(300), class: 'primary' },
+      { n: 350, height$: this.getHeightObservable$(350), class: 'info' },
+      { n: 400, height$: this.getHeightObservable$(400), class: 'success' },
+      { n: 450, height$: this.getHeightObservable$(450), class: 'warning' },
+      { n: 550, height$: this.getHeightObservable$(550), class: 'danger' }
+    ];
   }
 
   clear() {
@@ -30,10 +34,12 @@ export class AppComponent {
 
   asyncSingleThreadDemo() {
     this.clear();
-    getPrimes$(this.N).pipe(
-      debounceTime(16),
-      tap((i) => this.num$.next(i))
-    ).subscribe();
+    setTimeout(() => {
+      getPrimes$(this.N).pipe(
+        debounceTime(16),
+        tap((i) => this.num$.next(i))
+      ).subscribe();
+    }, 10);
   }
 
   workerDemo() {
@@ -49,9 +55,9 @@ export class AppComponent {
     worker.postMessage(`${this.N}`);
   }
 
-  private getHeightObservable$(seed: number, max: number): Observable<string> {
+  private getHeightObservable$(seed: number): Observable<string> {
     return this.num$.pipe(
-      map((i) => i ? `${max - ((i % seed) * max / seed)}px` : '100px')
+      map((i) => i ? `${400 - Math.round((i % seed) * 400 / seed)}px` : '100px')
     );
   }
 }
