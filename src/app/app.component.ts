@@ -49,7 +49,7 @@ export class AppComponent {
     worker.postMessage(`${this.N}`);
   }
 
-  getHeightObservable$(seed: number, max: number): Observable<string> {
+  private getHeightObservable$(seed: number, max: number): Observable<string> {
     return this.num$.pipe(
       map((i) => i ? `${max - ((i % seed) * max / seed)}px` : '100px')
     );
