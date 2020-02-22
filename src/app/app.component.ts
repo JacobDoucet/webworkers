@@ -36,7 +36,6 @@ export class AppComponent {
     this.clear();
     setTimeout(() => {
       getPrimes$(this.N).pipe(
-        debounceTime(16),
         tap((i) => this.num$.next(i))
       ).subscribe();
     }, 10);
