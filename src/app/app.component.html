@@ -4,20 +4,19 @@
     <h1 class="mb-0">Webworker Demo</h1>
   </div>
 
-  <div class="w-100 text-center text-dark mb-3">
-    <span>An expensive processes can make the UI unresponsive when running on the main thread.</span>
-    <br>
-    <span>Running the process in a worker frees up the main thread for the UI.</span>
+  <div class="w-100 text-center text-dark mb-2">
+    <h3 class="m-0 p-0">An expensive processes can make the UI unresponsive when running on the main thread.</h3>
+    <h3 class="m-0 p-0">Running the process in a worker frees up the main thread for the UI.</h3>
   </div>
 
   <div class="row justify-content-center">
 
     <button class="btn btn-outline-primary mx-1 w-25"
-            (click)="asyncSingleThreadDemo()">Start on <strong>MAIN THREAD</strong>
+            (click)="asyncSingleThreadDemo()">Run on <strong>MAIN THREAD</strong>
     </button>
 
     <button class="btn btn-outline-primary mx-1 w-25"
-            (click)="workerDemo()">Start on <strong>WORKER THREAD</strong>
+            (click)="workerDemo()">Run on <strong>WORKER THREAD</strong>
     </button>
 
   </div>
