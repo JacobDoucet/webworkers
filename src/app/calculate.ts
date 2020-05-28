@@ -2,7 +2,7 @@ import { Observable, Observer } from 'rxjs';
 
 export function getPrimes$(n: number) {
   return new Observable<number>(($: Observer<number>) => {
-    let i = 1500000;
+    let i = 2500000;
     let found = 0;
 
     while (found < n) {

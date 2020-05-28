@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { getPrimes$, } from './calculate';
-import { debounceTime, map, mergeMap, tap } from 'rxjs/internal/operators';
+import { map, tap } from 'rxjs/internal/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
@@ -56,7 +56,7 @@ export class AppComponent {
 
   private getHeightObservable$(seed: number): Observable<string> {
     return this.num$.pipe(
-      map((i) => i ? `${400 - Math.round((i % seed) * 400 / seed)}px` : '100px')
+      map((i) => i ? `${400 - Math.round((i % seed) * 400 / seed)}` : '100')
     );
   }
 }
